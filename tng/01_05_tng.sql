@@ -80,17 +80,17 @@ HAVING
 --   사원의 사번, 이름, 성별을 조회해 주세요.
 
 SELECT
-  emp_id
-  ,`name`
-  ,gender
+  employees.emp_id
+  ,employees.`name`
+  ,employees.gender
 FROM employees
-WHERE emp_id IN (
+WHERE employees.emp_id IN (
   SELECT 
-    emp_id
+    salaries.emp_id
   FROM salaries
-  GROUP BY emp_id
+  GROUP BY salaries.emp_id
   HAVING 
-    AVG(salary) >= 70000000
+    AVG(salaries.salary) >= 70000000
 )
 ;
 
@@ -98,15 +98,15 @@ WHERE emp_id IN (
 --   사원의 사원번호와 이름을 조회해 주세요.
 
 SELECT
-  emp_id
-  ,`name`
+  employees.emp_id
+  ,employees.`name`
 FROM employees
-WHERE emp_id IN (
+WHERE employees.emp_id IN (
   SELECT 
-    emp_id
+    title_emps.emp_id
   FROM title_emps
   WHERE 
-    title_code = 'T005'
-    AND end_at IS NULL 
+    title_emps.title_code = 'T005'
+    AND title_emps.end_at IS NULL 
 )
 ;
